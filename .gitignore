@@ -1,0 +1,17 @@
+# Backup
+*.bak
+*.old
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+tmp/
+
+# Editor
+*~
+*.swp
+
+# Cache
+cache/
