@@ -1,7 +1,7 @@
 # FRITZ!View
 
 > A modular dashboard framework for AVM FRITZ!Box devices powered by LCD4Linux.
-<´> (c) by Benni (Benjamin Bilzer, benjamin.bilzer@freenet.de)
+<´> (c) by Benni 
 
 ![Version](https://img.shields.io/badge/version-0.1.0-blue)
 ![Status](https://img.shields.io/badge/status-Development-orange)
