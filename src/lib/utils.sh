@@ -20,3 +20,23 @@ format_time()
 
     printf "%02d:%02d:%02d\n" "$H" "$M" "$S"
 }
+
+trim()
+{
+    sed 's/^ *//;s/ *$//'
+}
+
+kb_to_mbit()
+{
+    awk '{printf "%.1f",$1/1000}'
+}
+
+sec_to_time()
+{
+    local SEC="$1"
+
+    printf "%02d:%02d:%02d" \
+        $((SEC/3600)) \
+        $(((SEC%3600)/60)) \
+        $((SEC%60))
+}
