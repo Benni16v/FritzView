@@ -10,10 +10,9 @@ scheduler_loop()
     while true
     do
 
-        wan_update
-
-        dsl_update
-
+        update_wan
+	update_dsl
+	
         system_update
 
         tam_update

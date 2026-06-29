@@ -1,16 +1,8 @@
 #!/bin/sh
 
-wan_update()
+update_wan()
 {
-    cache_write wan_ip "$(tr064_get_wan_ip)"
+    ip="$(tr064_get_external_ip)"
 
-    XML="$(tr064_get_status)"
-
-    cache_write wan_status \
-        "$(echo "$XML" | xml "<NewConnectionStatus>")"
-
-    cache_write uptime \
-        "$(echo "$XML" | xml "<NewUptime>")"
-
-    log "WAN updated."
+    [ -n "$ip" ] && cache_write wan_ip "$ip"
 }
