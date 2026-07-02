@@ -74,3 +74,15 @@ dsl_get_dslam()
 {
     dsl_request | xml_value NewATUCVendor
 }
+
+dsl_get_power_down()
+{
+    dsl_request |
+    xml_value NewDownstreamPower
+}
+
+dsl_get_power_up()
+{
+    dsl_request |
+    xml_value NewUpstreamPower
+}

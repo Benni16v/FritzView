@@ -51,3 +51,42 @@ echo "Att Down    : $(dsl_get_attenuation_down)"
 echo "Att Up      : $(dsl_get_attenuation_up)"
 echo "Power Down  : $(dsl_get_power_down)"
 echo "Power Up    : $(dsl_get_power_up)"
+
+. src/modules/wifi.sh
+
+echo
+echo "=========================="
+echo "WIFI"
+echo "=========================="
+
+echo "Status       : $(wifi_get_status)"
+echo "SSID         : $(wifi_get_ssid)"
+echo "Channel      : $(wifi_get_channel)"
+echo "AutoChannel  : $(wifi_get_auto_channel)"
+echo "Standard     : $(wifi_get_standard)"
+echo "Bandwidth    : $(wifi_get_bandwidth)"
+echo "Max Bitrate  : $(wifi_get_max_bitrate)"
+echo "Encryption   : $(wifi_get_encryption)"
+echo "Auth Mode    : $(wifi_get_auth_mode)"
+echo "Clients      : $(wifi_get_total_associations)"
+echo "WPS          : $(wifi_get_wps)"
+
+echo "Guest WLAN   : $(wifi_guest_enabled)"
+echo "Guest SSID   : $(wifi_guest_ssid)"
+echo "Guest Clients: $(wifi_guest_clients)"
+
+. src/modules/network.sh
+
+echo
+echo "=========================="
+echo "NETWORK"
+echo "=========================="
+
+echo "Type         : $(network_get_connection_type)"
+echo "Layer1       : $(network_get_layer1_status)"
+echo "Max Down     : $(network_get_max_downstream)"
+echo "Max Up       : $(network_get_max_upstream)"
+echo "Bytes TX     : $(network_get_bytes_sent)"
+echo "Bytes RX     : $(network_get_bytes_received)"
+echo "Packets TX   : $(network_get_packets_sent)"
+echo "Packets RX   : $(network_get_packets_received)"
