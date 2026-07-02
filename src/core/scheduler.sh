@@ -4,31 +4,27 @@
 # FRITZ!View Scheduler
 # ==========================================================
 
-scheduler_loop()
-{
+#!/bin/sh
 
+scheduler_run()
+{
     while true
     do
 
+        update_system
+
         update_wan
-	update_dsl
-	
-        system_update
 
-        tam_update
-
-        update_update
-
-        history_update
-
-        phone_update
+        update_dsl
 
         display_refresh
-
-        render_pages
+        
+        wan_update
+	dsl_update
+	system_update
+	display_refresh
 
         sleep 5
 
     done
-
 }

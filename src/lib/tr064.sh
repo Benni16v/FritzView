@@ -1,63 +1,42 @@
 #!/bin/sh
-#
-# ==========================================================
-# TR-064 Library
-# ==========================================================
 
-TR064_HOST="fritz.box"
-TR064_PORT="49000"
+############################################################
+# XML Helper
+############################################################
 
-TR064_BASE="http://$TR064_HOST:$TR064_PORT"
-
-soap_request()
+xml_value()
 {
-    local control="$1"
-    local service="$2"
-    local action="$3"
-    local body="$4"
+    TAG="$1"
 
-    local xml="<?xml version=\"1.0\"?>
-<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">
-<s:Body>
-$body
-</s:Body>
-</s:Envelope>"
-
-    http_post \
-        "$TR064_BASE$control" \
-        "$service#$action" \
-        "$xml"
+    grep -oPm1 "(?<=<$TAG>)[^<]+"
 }
 
-tr064_get_external_ip()
+############################################################
+# Request
+############################################################
+
+tr064_request()
 {
-    soap_request \
-        "/upnp/control/wanipconnection1" \
-        "urn:dslforum-org:service:WANIPConnection:1" \
-        "GetExternalIPAddress" \
-"<u:GetExternalIPAddress xmlns:u=\"urn:dslforum-org:service:WANIPConnection:1\"/>" \
-    | sed -n 's:.*<NewExternalIPAddress>\(.*\)</NewExternalIPAddress>.*:\1:p'
-}
+    SERVICE="$1"
+    CONTROL="$2"
+    ACTION="$3"
+    BODY="$4"
 
-tr064_get_dsl_info()
-{
-    soap_request \
-        "/upnp/control/wandslifconfig1" \
-        "urn:dslforum-org:service:WANDSLInterfaceConfig:1" \
-        "X_AVM-DE_GetDSLInfo" \
-"<u:X_AVM-DE_GetDSLInfo xmlns:u=\"urn:dslforum-org:service:WANDSLInterfaceConfig:1\"/>"
-}
+    TMP=$(mktemp)
 
-tr064_get_dsl_rate()
-{
-    tr064_get_dsl_info | awk -F'[<>]' '
+    printf '%s' "$BODY" > "$TMP"
 
-/NewDownstreamCurrRate/ {down=$3}
+    curl -sk \
+        --anyauth \
+        --user "$TR064_USER:$TR064_PASS" \
+        -H 'Content-Type: text/xml; charset="utf-8"' \
+        -H "SOAPACTION: \"$SERVICE#$ACTION\"" \
+        --data-binary @"$TMP" \
+        "https://$TR064_HOST:$TR064_PORT$CONTROL"
 
-/NewUpstreamCurrRate/ {up=$3}
+    RC=$?
 
-END{
-print down ";" up
-}
-'
+    rm -f "$TMP"
+
+    return "$RC"
 }

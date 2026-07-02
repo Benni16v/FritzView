@@ -1,19 +1,46 @@
 #!/bin/sh
+#
+# ==========================================================
+# FRITZ!View Authentication
+# ==========================================================
 
-SID="0000000000000000"
+SID=""
+CHALLENGE=""
+BLOCKTIME="0"
 
 auth_init()
 {
-    SID="$(auth_login)"
+    auth_login
+}
 
-    [ "$SID" = "0000000000000000" ] && {
+auth_login()
+{
+    local xml
 
-        log "Authentication failed."
+    xml=$(curl -ks "http://$TR064_HOST/login_sid.lua")
 
+    SID=$(echo "$xml" | sed -n 's:.*<SID>\(.*\)</SID>.*:\1:p')
+
+    if [ "$SID" != "0000000000000000" ] && [ -n "$SID" ]; then
+        log "Existing SID accepted."
+        return 0
+    fi
+
+    CHALLENGE=$(echo "$xml" | sed -n 's:.*<Challenge>\(.*\)</Challenge>.*:\1:p')
+
+    BLOCKTIME=$(echo "$xml" | sed -n 's:.*<BlockTime>\(.*\)</BlockTime>.*:\1:p')
+
+    if [ "$BLOCKTIME" != "0" ]; then
+        log "Login blocked for $BLOCKTIME seconds."
         return 1
-    }
+    fi
 
-    log "SID: $SID"
+    auth_login_pbkdf2
+}
 
-    return 0
+auth_login_pbkdf2()
+{
+    log "PBKDF2 login not implemented yet."
+
+    return 1
 }

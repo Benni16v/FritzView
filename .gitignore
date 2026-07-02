@@ -18,4 +18,8 @@ cache/
 
 *.zip
 
+config/credentials.conf
+token.log
+lcd4linux.conf
+
 

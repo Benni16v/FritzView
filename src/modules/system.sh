@@ -1,33 +1,30 @@
 #!/bin/sh
-#
-# ==========================================================
-# FRITZ!View System Module
-# ==========================================================
 
-system_update()
+system_xml()
 {
-    CPU=$(grep "cpu " /proc/stat)
+    tr064_request \
+        "urn:dslforum-org:service:DeviceConfig:1" \
+        "/upnp/control/deviceconfig" \
+        "GetInfo" \
+'<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+<s:Body>
+<u:GetInfo xmlns:u="urn:dslforum-org:service:DeviceConfig:1"/>
+</s:Body>
+</s:Envelope>'
+}
 
-    MEM_TOTAL=$(grep MemTotal /proc/meminfo | awk '{print $2}')
-    MEM_FREE=$(grep MemAvailable /proc/meminfo | awk '{print $2}')
+system_get_uptime()
+{
+    system_xml | xml_value NewUpTime
+}
 
-    RAM=$((100-(MEM_FREE*100/MEM_TOTAL)))
+system_get_reboot_required()
+{
+    system_xml | xml_value NewRebootRequired
+}
 
-    cache_write ram "$RAM"
-
-    LOAD=$(cut -d' ' -f1 /proc/loadavg)
-
-    cache_write cpu "$LOAD"
-
-    if [ -f /sys/class/thermal/thermal_zone0/temp ]
-    then
-        TEMP=$(cat /sys/class/thermal/thermal_zone0/temp)
-        TEMP=$((TEMP/1000))
-    else
-        TEMP="--"
-    fi
-
-    cache_write temp "$TEMP"
-
-    log "System updated."
+system_get_config_version()
+{
+    system_xml | xml_value NewConfigVersion
 }

@@ -1,16 +1,20 @@
 #!/bin/sh
-#
-# ==========================================================
-# FRITZ!View Phone Module
-# ==========================================================
 
-phone_update()
+phone_xml()
 {
-    [ -f "$CACHE/phone/status" ] || echo "IDLE" > "$CACHE/phone/status"
-    [ -f "$CACHE/phone/name" ]   || echo "" > "$CACHE/phone/name"
-    [ -f "$CACHE/phone/number" ] || echo "" > "$CACHE/phone/number"
+    tr064_request \
+        "urn:dslforum-org:service:X_VoIP:1" \
+        "/upnp/control/x_voip" \
+        "GetInfo" \
+'<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+<s:Body>
+<u:GetInfo xmlns:u="urn:dslforum-org:service:X_VoIP:1"/>
+</s:Body>
+</s:Envelope>'
+}
 
-    cache_write phone/status "$(cat "$CACHE/phone/status")"
-    cache_write phone/name   "$(cat "$CACHE/phone/name")"
-    cache_write phone/number "$(cat "$CACHE/phone/number")"
+phone_get_state()
+{
+    phone_xml
 }

@@ -1,16 +1,30 @@
 #!/bin/sh
 
-network_update()
+network_xml()
 {
+    tr064_request \
+        "urn:dslforum-org:service:LANHostConfigManagement:1" \
+        "/upnp/control/lanhostconfigmgm" \
+        "GetInfo" \
+'<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+<s:Body>
+<u:GetInfo xmlns:u="urn:dslforum-org:service:LANHostConfigManagement:1"/>
+</s:Body>
+</s:Envelope>'
+}
 
-    cache_write ip "$(get_wan_ip)"
+network_get_ip()
+{
+    network_xml | xml_value NewIPAddress
+}
 
-    cache_write down "$(get_dsl_down)"
+network_get_mask()
+{
+    network_xml | xml_value NewSubnetMask
+}
 
-    cache_write up "$(get_dsl_up)"
-
-    cache_write maxdown "$(get_dsl_max_down)"
-
-    cache_write maxup "$(get_dsl_max_up)"
-
+network_get_dhcp()
+{
+    network_xml | xml_value NewDHCPServerConfigurable
 }

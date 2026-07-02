@@ -91,6 +91,6 @@ init
 
 "$BASE/core/callmonitor.sh" &
 
-run
+scheduler_run
 
 shutdown

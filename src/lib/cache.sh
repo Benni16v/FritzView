@@ -1,31 +1,42 @@
 #!/bin/sh
 #
 # ==========================================================
-# FRITZ!View Cache Library
+# Cache Library
 # ==========================================================
 
-CACHE=${CACHE:-/var/tmp/fritzview}
+CACHE="/var/tmp/fritzview"
 
 cache_init()
 {
     mkdir -p "$CACHE"
+
+    mkdir -p "$CACHE/system"
+    mkdir -p "$CACHE/network"
+    mkdir -p "$CACHE/phone"
+    mkdir -p "$CACHE/history"
+    mkdir -p "$CACHE/display"
 }
 
 cache_write()
 {
-    local KEY="$1"
-    shift
+    local key="$1"
+    local value="$2"
 
-    mkdir -p "$(dirname "$CACHE/$KEY")"
+    mkdir -p "$(dirname "$CACHE/$key")"
 
-    printf "%s\n" "$*" > "$CACHE/$KEY"
+    echo "$value" > "$CACHE/$key"
 }
 
 cache_read()
 {
-    local KEY="$1"
+    local key="$1"
 
-    [ -f "$CACHE/$KEY" ] && cat "$CACHE/$KEY"
+    [ -f "$CACHE/$key" ] || {
+        echo ""
+        return
+    }
+
+    cat "$CACHE/$key"
 }
 
 cache_exists()
