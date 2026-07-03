@@ -19,3 +19,44 @@ v0.1 Genesis
 [ ] Installer
 
 [ ] Themes
+
+v0.2
+
+Core
+[x] TR064
+
+[x] Config
+
+[x] Credentials
+
+[x] Tests
+
+Informationen
+
+[x] WAN
+
+[x] WLAN
+
+[x] Hosts
+
+[x] DSL
+
+[x] Network
+
+[x] Box
+
+[ ] Telefonie
+
+[ ] Mesh
+
+[ ] SmartHome
+
+Display
+
+[ ] LCD4Linux
+
+[ ] Freetz
+
+[ ] Plugin API
+
+[ ] Themes

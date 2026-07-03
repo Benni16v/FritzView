@@ -126,3 +126,8 @@ wan_get_packets_received()
 </s:Envelope>' |
 xml_value NewTotalPacketsReceived
 }
+
+wan_update()
+{
+    wan_request > "$BASE/cache/wan.xml"
+}

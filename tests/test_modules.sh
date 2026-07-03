@@ -90,3 +90,51 @@ echo "Bytes TX     : $(network_get_bytes_sent)"
 echo "Bytes RX     : $(network_get_bytes_received)"
 echo "Packets TX   : $(network_get_packets_sent)"
 echo "Packets RX   : $(network_get_packets_received)"
+
+. src/modules/system.sh
+
+echo
+echo "=========================="
+echo "SYSTEM"
+echo "=========================="
+
+echo "Hersteller : $(system_manufacturer)"
+echo "Modell     : $(system_model)"
+echo "Produkt    : $(system_productclass)"
+echo "Hardware   : $(system_hardware)"
+echo "Firmware   : $(system_firmware)"
+echo "Version    : $(system_specversion)"
+echo "Seriennr.  : $(system_serial)"
+echo "Uptime     : $(system_uptime)"
+echo "Beschreibung:"
+echo "$(system_description)"
+
+. src/modules/tam.sh
+
+echo
+echo "=========================="
+echo "TAM"
+echo "=========================="
+
+echo "Enabled      : $(tam_enabled)"
+echo "Running      : $(tam_running)"
+echo "Name         : $(tam_name)"
+echo "Mode         : $(tam_mode)"
+echo "Capacity     : $(tam_capacity)%"
+echo "Ring Seconds : $(tam_ringseconds)"
+echo "Status        : $(tam_status)"
+echo "Numbers       : $(tam_numbers)"
+
+. src/modules/storage.sh
+
+echo
+echo "=========================="
+echo "STORAGE"
+echo "=========================="
+
+echo "FTP         : $(storage_ftp_enabled)"
+echo "FTP Status  : $(storage_ftp_status)"
+echo "SMB         : $(storage_smb_enabled)"
+echo "WAN FTP     : $(storage_ftp_wan)"
+echo "SSL only    : $(storage_ssl_only)"
+echo "FTP Port    : $(storage_port)"

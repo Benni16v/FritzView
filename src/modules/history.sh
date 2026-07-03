@@ -1,25 +1,39 @@
 #!/bin/sh
 
-ONLINEFILE="$CACHE/history/online"
-
-history_update()
+history_xml()
 {
+    tr064_request \
+        "urn:dslforum-org:service:DeviceInfo:1" \
+        "/upnp/control/deviceinfo" \
+        "GetInfo" \
+'<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+<s:Body>
+<u:GetInfo xmlns:u="urn:dslforum-org:service:DeviceInfo:1"/>
+</s:Body>
+</s:Envelope>'
+}
 
-STATUS="$(cache_read wan_status)"
+history_log()
+{
+    history_xml |
+    xml_value NewDeviceLog
+}
 
-mkdir -p "$CACHE/history"
+history_last()
+{
+    history_log |
+    head -n1
+}
 
-if [ "$STATUS" = "Connected" ]
-then
-    echo 1 >> "$ONLINEFILE"
-else
-    echo 0 >> "$ONLINEFILE"
-fi
+history_lines()
+{
+    history_log |
+    wc -l
+}
 
-tail -288 "$ONLINEFILE" > "$ONLINEFILE.tmp"
-
-mv "$ONLINEFILE.tmp" "$ONLINEFILE"
-
-cache_write online_history "$(cat "$ONLINEFILE")"
-
+history_show()
+{
+    history_log |
+    nl
 }
