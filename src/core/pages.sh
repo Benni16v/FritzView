@@ -1,55 +1,59 @@
 #!/bin/sh
-#
-# ==========================================================
-# FRITZ!View Page Renderer
-# ==========================================================
 
-page_system()
+page_overview()
 {
+    clear
 
-cat << EOF
-========================
+    echo "=============================="
+    echo "        FritzView"
+    echo "=============================="
 
- FRITZ!View
+    echo
+    echo "Router : $BOX_MODEL"
+    echo "FW     : $BOX_FW"
 
-------------------------
+    echo
+    echo "Internet"
 
-IP   : $(cache_read wan_ip)
+    echo "Status : $WAN_STATUS"
+    echo "IP     : $WAN_IP"
 
-DSL  : $(cache_read dsl_down) / $(cache_read dsl_up)
+    echo
+    echo "LAN"
 
-CPU  : $(cache_read cpu)
+    echo "$NET_TYPE"
 
-RAM  : $(cache_read ram)%
+    echo
+    echo "Clients: $HOSTS"
 
-TEMP : $(cache_read temp)°C
-
-========================
-EOF
-
+    echo
+    echo "$LAST_EVENT"
 }
 
-############################################################
-
-page_phone()
+page_wifi()
 {
+    clear
 
-cat << EOF
-========================
+    echo "====== WLAN ======"
 
- TELEFON
+    echo
+    echo "SSID     : $WIFI_SSID"
+    echo "Channel  : $WIFI_CHANNEL"
+    echo "Clients  : $WIFI_CLIENTS"
+}
 
-------------------------
+page_box()
+{
+    clear
 
-Status : $(cache_read phone/status)
+    echo "====== BOX ======"
 
-Name   : $(cache_read phone/name)
+    echo
+    echo "Model : $BOX_MODEL"
+    echo "FW    : $BOX_FW"
 
-Nummer :
+    echo
+    echo "Uptime"
 
-$(cache_read phone/number)
-
-========================
-EOF
-
+    echo "$BOX_UPTIME s"
 }

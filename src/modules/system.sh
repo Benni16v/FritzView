@@ -1,6 +1,8 @@
-#!/bin/sh
+############################################################
+# SYSTEM
+############################################################
 
-system_xml()
+system_request()
 {
     tr064_request \
         "urn:dslforum-org:service:DeviceInfo:1" \
@@ -14,47 +16,47 @@ system_xml()
 </s:Envelope>'
 }
 
-system_manufacturer()
+system_name()
 {
-    system_xml | xml_value NewManufacturerName
+    system_request | xml_value NewModelName
 }
 
-system_model()
+system_vendor()
 {
-    system_xml | xml_value NewModelName
+    system_request | xml_value NewManufacturerName
 }
 
-system_firmware()
+system_version()
 {
-    system_xml | xml_value NewSoftwareVersion
+    system_request | xml_value NewSoftwareVersion
 }
 
 system_serial()
 {
-    system_xml | xml_value NewSerialNumber
+    system_request | xml_value NewSerialNumber
 }
 
 system_uptime()
 {
-    system_xml | xml_value NewUpTime
+    system_request | xml_value NewUpTime
 }
 
 system_description()
 {
-    system_xml | xml_value NewDescription
+    system_request | xml_value NewDescription
 }
 
-system_productclass()
+system_product()
 {
-    system_xml | xml_value NewProductClass
+    system_request | xml_value NewProductClass
+}
+
+system_spec()
+{
+    system_request | xml_value NewSpecVersion
 }
 
 system_hardware()
 {
-    system_xml | xml_value NewHardwareVersion
-}
-
-system_specversion()
-{
-    system_xml | xml_value NewSpecVersion
+    system_request | xml_value NewHardwareVersion
 }

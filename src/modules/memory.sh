@@ -1,25 +1,25 @@
-#!/bin/sh
-
-############################################################
-# Memory Module
-############################################################
-
 memory_total()
 {
-    echo "-"
-}
-
-memory_used()
-{
-    echo "-"
+    awk '/MemTotal/ {print $2}' /proc/meminfo
 }
 
 memory_free()
 {
-    echo "-"
+    awk '/MemAvailable/ {print $2}' /proc/meminfo
+}
+
+memory_used()
+{
+    total=$(memory_total)
+    free=$(memory_free)
+
+    echo $((total-free))
 }
 
 memory_percent()
 {
-    echo "-"
+    total=$(memory_total)
+    used=$(memory_used)
+
+    echo $((used*100/total))
 }

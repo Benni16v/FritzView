@@ -1,125 +1,24 @@
 #!/bin/sh
 
-network_xml()
+############################################################
+# NETWORK
+############################################################
+
+network_request()
 {
     tr064_request \
-        "urn:dslforum-org:service:LANHostConfigManagement:1" \
-        "/upnp/control/lanhostconfigmgm" \
-        "GetInfo" \
+        "urn:dslforum-org:service:WANCommonInterfaceConfig:1" \
+        "/upnp/control/wancommonifconfig1" \
+        "GetCommonLinkProperties" \
 '<?xml version="1.0"?>
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
 <s:Body>
-<u:GetInfo xmlns:u="urn:dslforum-org:service:LANHostConfigManagement:1"/>
+<u:GetCommonLinkProperties xmlns:u="urn:dslforum-org:service:WANCommonInterfaceConfig:1"/>
 </s:Body>
 </s:Envelope>'
 }
 
-network_get_ip()
-{
-    network_xml | xml_value NewIPAddress
-}
-
-network_get_mask()
-{
-    network_xml | xml_value NewSubnetMask
-}
-
-network_get_dhcp()
-{
-    network_xml | xml_value NewDHCPServerConfigurable
-}
-
-network_get_connection_type()
-{
-    tr064_request \
-        "urn:dslforum-org:service:WANCommonInterfaceConfig:1" \
-        "/upnp/control/wancommonifconfig1" \
-        "GetCommonLinkProperties" \
-'<?xml version="1.0"?>
-<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-<s:Body>
-<u:GetCommonLinkProperties xmlns:u="urn:dslforum-org:service:WANCommonInterfaceConfig:1"/>
-</s:Body>
-</s:Envelope>' |
-xml_value NewWANAccessType
-}
-
-network_get_layer1_status()
-{
-    tr064_request \
-        "urn:dslforum-org:service:WANCommonInterfaceConfig:1" \
-        "/upnp/control/wancommonifconfig1" \
-        "GetCommonLinkProperties" \
-'<?xml version="1.0"?>
-<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-<s:Body>
-<u:GetCommonLinkProperties xmlns:u="urn:dslforum-org:service:WANCommonInterfaceConfig:1"/>
-</s:Body>
-</s:Envelope>' |
-xml_value NewPhysicalLinkStatus
-}
-
-network_get_max_downstream()
-{
-    tr064_request \
-        "urn:dslforum-org:service:WANCommonInterfaceConfig:1" \
-        "/upnp/control/wancommonifconfig1" \
-        "GetCommonLinkProperties" \
-'<?xml version="1.0"?>
-<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-<s:Body>
-<u:GetCommonLinkProperties xmlns:u="urn:dslforum-org:service:WANCommonInterfaceConfig:1"/>
-</s:Body>
-</s:Envelope>' |
-xml_value NewLayer1DownstreamMaxBitRate
-}
-
-network_get_max_upstream()
-{
-    tr064_request \
-        "urn:dslforum-org:service:WANCommonInterfaceConfig:1" \
-        "/upnp/control/wancommonifconfig1" \
-        "GetCommonLinkProperties" \
-'<?xml version="1.0"?>
-<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-<s:Body>
-<u:GetCommonLinkProperties xmlns:u="urn:dslforum-org:service:WANCommonInterfaceConfig:1"/>
-</s:Body>
-</s:Envelope>' |
-xml_value NewLayer1UpstreamMaxBitRate
-}
-
-network_get_packets_sent()
-{
-    tr064_request \
-        "urn:dslforum-org:service:WANCommonInterfaceConfig:1" \
-        "/upnp/control/wancommonifconfig1" \
-        "GetTotalPacketsSent" \
-'<?xml version="1.0"?>
-<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-<s:Body>
-<u:GetTotalPacketsSent xmlns:u="urn:dslforum-org:service:WANCommonInterfaceConfig:1"/>
-</s:Body>
-</s:Envelope>' |
-xml_value NewTotalPacketsSent
-}
-
-network_get_packets_received()
-{
-    tr064_request \
-        "urn:dslforum-org:service:WANCommonInterfaceConfig:1" \
-        "/upnp/control/wancommonifconfig1" \
-        "GetTotalPacketsReceived" \
-'<?xml version="1.0"?>
-<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-<s:Body>
-<u:GetTotalPacketsReceived xmlns:u="urn:dslforum-org:service:WANCommonInterfaceConfig:1"/>
-</s:Body>
-</s:Envelope>' |
-xml_value NewTotalPacketsReceived
-}
-
-network_get_bytes_sent()
+network_total_request()
 {
     tr064_request \
         "urn:dslforum-org:service:WANCommonInterfaceConfig:1" \
@@ -130,11 +29,10 @@ network_get_bytes_sent()
 <s:Body>
 <u:GetTotalBytesSent xmlns:u="urn:dslforum-org:service:WANCommonInterfaceConfig:1"/>
 </s:Body>
-</s:Envelope>' |
-xml_value NewTotalBytesSent
+</s:Envelope>'
 }
 
-network_get_bytes_received()
+network_receive_request()
 {
     tr064_request \
         "urn:dslforum-org:service:WANCommonInterfaceConfig:1" \
@@ -145,8 +43,77 @@ network_get_bytes_received()
 <s:Body>
 <u:GetTotalBytesReceived xmlns:u="urn:dslforum-org:service:WANCommonInterfaceConfig:1"/>
 </s:Body>
-</s:Envelope>' |
-xml_value NewTotalBytesReceived
+</s:Envelope>'
 }
 
+network_packets_sent_request()
+{
+    tr064_request \
+        "urn:dslforum-org:service:WANCommonInterfaceConfig:1" \
+        "/upnp/control/wancommonifconfig1" \
+        "GetTotalPacketsSent" \
+'<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+<s:Body>
+<u:GetTotalPacketsSent xmlns:u="urn:dslforum-org:service:WANCommonInterfaceConfig:1"/>
+</s:Body>
+</s:Envelope>'
+}
 
+network_packets_received_request()
+{
+    tr064_request \
+        "urn:dslforum-org:service:WANCommonInterfaceConfig:1" \
+        "/upnp/control/wancommonifconfig1" \
+        "GetTotalPacketsReceived" \
+'<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+<s:Body>
+<u:GetTotalPacketsReceived xmlns:u="urn:dslforum-org:service:WANCommonInterfaceConfig:1"/>
+</s:Body>
+</s:Envelope>'
+}
+
+############################################################
+# Getter
+############################################################
+
+network_get_type()
+{
+    network_request | xml_value NewWANAccessType
+}
+
+network_get_layer1()
+{
+    network_request | xml_value NewPhysicalLinkStatus
+}
+
+network_get_max_downstream()
+{
+    network_request | xml_value NewLayer1DownstreamMaxBitRate
+}
+
+network_get_max_upstream()
+{
+    network_request | xml_value NewLayer1UpstreamMaxBitRate
+}
+
+network_get_bytes_sent()
+{
+    network_total_request | xml_value NewTotalBytesSent
+}
+
+network_get_bytes_received()
+{
+    network_receive_request | xml_value NewTotalBytesReceived
+}
+
+network_get_packets_sent()
+{
+    network_packets_sent_request | xml_value NewTotalPacketsSent
+}
+
+network_get_packets_received()
+{
+    network_packets_received_request | xml_value NewTotalPacketsReceived
+}

@@ -1,23 +1,50 @@
 #!/bin/sh
-
+echo "BASE beim Start: $BASE"
 ############################################################
-# FritzView Initialisierung
-############################################################
-
-BASE="$(cd "$(dirname "$0")/.." && pwd)"
-
-############################################################
-# Konfiguration
+# FritzView Initialization
 ############################################################
 
+[ -n "$BASE" ] || return 1
+
+############################################################
+# Configuration
+############################################################
+echo "Lade Config aus: $BASE/config/config.sh"
 . "$BASE/config/config.sh"
 
 ############################################################
-# Bibliotheken
+# Libraries
 ############################################################
 
-. "$BASE/src/lib/logger.sh"
-. "$BASE/src/lib/utils.sh"
-. "$BASE/src/lib/http.sh"
-. "$BASE/src/lib/cache.sh"
-. "$BASE/src/lib/tr064.sh"
+for file in "$BASE"/src/lib/*.sh
+do
+    [ -f "$file" ] && . "$file"
+done
+
+############################################################
+# Modules
+############################################################
+
+for file in "$BASE"/src/modules/*.sh
+do
+    echo "Loading: $file"
+    . "$file" || echo "ERROR loading $file"
+done
+
+#################################################
+# Cache
+############################################################
+
+for file in "$BASE"/src/cache/*.sh
+do
+    [ -f "$file" ] && . "$file"
+done
+
+############################################################
+# Display
+############################################################
+
+for file in "$BASE"/src/display/*.sh
+do
+    [ -f "$file" ] && . "$file"
+done
