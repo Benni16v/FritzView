@@ -25,4 +25,6 @@ page_overview()
     display_line "Uptime   : $SYSTEM_UPTIME"
 
     display_footer
+
+    display_end
 }

@@ -80,11 +80,6 @@ wifi_get_max_bitrate()
     wifi_request | xml_value NewMaxBitRate
 }
 
-wifi_get_total_associations()
-{
-    wifi_request | xml_value NewTotalAssociations
-}
-
 wifi_get_ssid_hidden()
 {
     wifi_request | xml_value NewSSIDAdvertisementEnabled
@@ -116,6 +111,25 @@ wifi_get_auth_mode()
 }
 
 ############################################################
+# WLAN Clients
+############################################################
+
+wifi_get_total_associations()
+{
+    tr064_request \
+        "urn:dslforum-org:service:WLANConfiguration:1" \
+        "/upnp/control/wlanconfig1" \
+        "GetTotalAssociations" \
+'<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+<s:Body>
+<u:GetTotalAssociations xmlns:u="urn:dslforum-org:service:WLANConfiguration:1"/>
+</s:Body>
+</s:Envelope>' |
+    xml_value NewTotalAssociations
+}
+
+############################################################
 # Guest WLAN
 ############################################################
 
@@ -132,4 +146,13 @@ wifi_guest_ssid()
 wifi_guest_clients()
 {
     wifi_guest_request | xml_value NewTotalAssociations
+}
+
+############################################################
+# WLAN Diagnose
+############################################################
+
+wifi_dump()
+{
+    wifi_request
 }

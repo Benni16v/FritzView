@@ -1,15 +1,19 @@
 #!/bin/sh
-echo "BASE beim Start: $BASE"
+
 ############################################################
 # FritzView Initialization
 ############################################################
 
-[ -n "$BASE" ] || return 1
+if [ -z "$BASE" ]; then
+    BASE="$(pwd)"
+fi
+
+export BASE
 
 ############################################################
 # Configuration
 ############################################################
-echo "Lade Config aus: $BASE/config/config.sh"
+
 . "$BASE/config/config.sh"
 
 ############################################################
@@ -48,3 +52,21 @@ for file in "$BASE"/src/display/*.sh
 do
     [ -f "$file" ] && . "$file"
 done
+
+############################################################
+# Display Driver
+############################################################
+
+DRIVER="$BASE/src/displays/$DISPLAY_DRIVER.sh"
+
+if [ -f "$DRIVER" ]; then
+    . "$DRIVER"
+else
+    echo "Display driver '$DISPLAY_DRIVER' not found."
+    exit 1
+fi
+
+debug_loaded()
+{
+    echo "FritzView initialized."
+}
