@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ############################################################
-# WLAN
+# WLAN 2,4GHZ
 ############################################################
 
 wifi_request()
@@ -14,6 +14,24 @@ wifi_request()
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
 <s:Body>
 <u:GetInfo xmlns:u="urn:dslforum-org:service:WLANConfiguration:1"/>
+</s:Body>
+</s:Envelope>'
+}
+
+############################################################
+# WLAN 5GHZ
+############################################################
+
+wifi5_request()
+{
+    tr064_request \
+        "urn:dslforum-org:service:WLANConfiguration:2" \
+        "/upnp/control/wlanconfig2" \
+        "GetTotalAssociations" \
+'<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+<s:Body>
+<u:GetTotalAssociations xmlns:u="urn:dslforum-org:service:WLANConfiguration:2"/>
 </s:Body>
 </s:Envelope>'
 }
@@ -111,7 +129,7 @@ wifi_get_auth_mode()
 }
 
 ############################################################
-# WLAN Clients
+# WLAN Clients 2,4GHZ
 ############################################################
 
 wifi_get_total_associations()
@@ -130,6 +148,48 @@ wifi_get_total_associations()
 }
 
 ############################################################
+# WLAN Clients 5GHZ
+############################################################
+
+wifi5_get_total_associations()
+{
+    wifi5_request |
+    xml_value NewTotalAssociations
+}
+
+############################################################
+# WLAN Guest Clients 
+############################################################
+
+wifi_guest_clients()
+{
+    tr064_request \
+        "urn:dslforum-org:service:WLANConfiguration:3" \
+        "/upnp/control/wlanconfig3" \
+        "GetTotalAssociations" \
+'<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+<s:Body>
+<u:GetTotalAssociations xmlns:u="urn:dslforum-org:service:WLANConfiguration:3"/>
+</s:Body>
+</s:Envelope>' |
+    xml_value NewTotalAssociations
+}
+
+############################################################
+# WLAN Clients auslesen
+############################################################
+
+wifi_get_clients()
+{
+    C24="${C24:-$(wifi_get_total_associations)}"
+    C5="${C5:-$(wifi5_get_total_associations)}"
+    CGUEST="${CGUEST:-$(wifi_guest_clients)}"
+
+    echo $(( ${C24:-0} + ${C5:-0} + ${CGUEST:-0} ))
+}
+
+############################################################
 # Guest WLAN
 ############################################################
 
@@ -141,11 +201,6 @@ wifi_guest_enabled()
 wifi_guest_ssid()
 {
     wifi_guest_request | xml_value NewSSID
-}
-
-wifi_guest_clients()
-{
-    wifi_guest_request | xml_value NewTotalAssociations
 }
 
 ############################################################

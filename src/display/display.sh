@@ -71,3 +71,9 @@ display_render()
         printf "%b\n" "$1"
     fi
 }
+
+display_title()
+{
+    display_line " FritzView $(date +%H:%M)"
+    display_separator
+}
