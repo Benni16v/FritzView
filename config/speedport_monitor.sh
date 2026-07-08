@@ -4,7 +4,7 @@
 # CONFIG
 # =========================
 SP_HOST="http://192.168.2.1"
-SP_PASS="97380508"
+SP_PASS=""
 
 COOKIE="/tmp/speedport_cookie.txt"
 TMP="/tmp/speedport_status.json"
