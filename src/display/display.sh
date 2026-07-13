@@ -1,19 +1,68 @@
-#!/bin/sh
+case "$DISPLAY_DRIVER" in
+
+console)
+
+    . "$BASE/src/displays/console.sh"
+
+;;
+
+lcd4linux)
+
+    . "$BASE/src/displays/lcd4linux.sh"
+
+;;
+
+pearl)
+
+    . "$BASE/src/displays/pearl.sh"
+
+;;
+
+esac
 
 ############################################################
-# Display API
+# Widgets
 ############################################################
 
-DISPLAY_BUFFER=""
-
-display_init()
+display_title()
 {
-    DISPLAY_BUFFER=""
+    display_line "$1"
+    display_separator
 }
 
-display_begin()
+display_value()
 {
-    DISPLAY_BUFFER=""
+    printf -v LINE "%-10s %s" "$1" "$2"
+    display_line "$LINE"
+}
+
+display_icon()
+{
+    display_line "$1 $2"
+}
+
+display_progress()
+{
+    VALUE="$1"
+    MAX="$2"
+
+    BAR=""
+
+    I=0
+
+    while [ "$I" -lt "$MAX" ]
+    do
+        if [ "$I" -lt "$VALUE" ]
+        then
+            BAR="${BAR}#"
+        else
+            BAR="${BAR}-"
+        fi
+
+        I=$((I+1))
+    done
+
+    display_line "[$BAR]"
 }
 
 display_clear()
@@ -26,54 +75,25 @@ display_line()
     DISPLAY_BUFFER="${DISPLAY_BUFFER}$1\n"
 }
 
-display_text()
-{
-    DISPLAY_BUFFER="${DISPLAY_BUFFER}$1"
-}
-
-display_end()
-{
-    display_render "$DISPLAY_BUFFER"
-}
-
-############################################################
-# Helper
-############################################################
-
-display_header()
-{
-    display_line "=============================="
-    display_line "        FritzView"
-    display_line "=============================="
-    display_line ""
-}
-
 display_separator()
 {
     display_line "------------------------------"
 }
 
+display_header()
+{
+    TIME="$(date +%H:%M)"
+
+    display_line " FRITZ!View             $TIME"
+    display_separator
+}
+
 display_footer()
 {
-    display_line "=============================="
-}
-
-############################################################
-# Render
-############################################################
-
-display_render()
-{
-    if command -v display_driver_render >/dev/null 2>&1
-    then
-        display_driver_render "$1"
-    else
-        printf "%b\n" "$1"
-    fi
-}
-
-display_title()
-{
-    display_line " FritzView $(date +%H:%M)"
     display_separator
+}
+
+display_end()
+{
+    display_driver_render "$DISPLAY_BUFFER"
 }

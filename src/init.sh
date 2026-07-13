@@ -31,7 +31,7 @@ done
 
 for file in "$BASE"/src/modules/*.sh
 do
-    echo "Loading: $file"
+    [ "$LOGLEVEL" -ge 2 ] && echo "Loading: $file"
     . "$file" || echo "ERROR loading $file"
 done
 
@@ -59,12 +59,34 @@ done
 
 DRIVER="$BASE/src/displays/$DISPLAY_DRIVER.sh"
 
-if [ -f "$DRIVER" ]; then
+if [ -f "$DRIVER" ]
+then
     . "$DRIVER"
 else
     echo "Display driver '$DISPLAY_DRIVER' not found."
     exit 1
 fi
+
+############################################################
+# Boot Screens
+############################################################
+
+for file in "$BASE"/src/boot/*.sh
+do
+    [ -f "$file" ] && . "$file"
+done
+
+############################################################
+# Theme
+############################################################
+
+THEME_DIR="$BASE/themes/$THEME"
+
+[ -f "$THEME_DIR/$THEME.sh" ] && . "$THEME_DIR/$THEME.sh"
+
+############################################################
+# Debug
+############################################################
 
 debug_loaded()
 {

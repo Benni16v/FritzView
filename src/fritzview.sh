@@ -1,15 +1,22 @@
 #!/bin/sh
 
 BASE="$(cd "$(dirname "$0")/.." && pwd)"
-export BASE
 
 . "$BASE/src/init.sh"
 
-display_init
+boot_start
+
+display_driver_init
+
+cache_update
+page_manager
+
 
 while true
 do
     cache_update
-    page_overview
+
+    page_manager
+
     sleep "$UPDATE_INTERVAL"
 done

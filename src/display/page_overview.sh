@@ -5,26 +5,20 @@ page_overview()
     display_clear
     display_header
 
-    display_line ""
-
-    display_line "Router   : $SYSTEM_NAME"
-    display_line "Firmware : $SYSTEM_VERSION"
+    widget_router
 
     display_separator
 
-    display_line "Internet : $WAN_STATUS"
-    display_line "IP       : $WAN_IP"
+    widget_internet
 
     display_separator
 
-    display_line "Hosts    : $HOSTS"
-    display_line "WLAN     : $WIFI_CLIENTS"
+    widget_network
 
     display_separator
 
-    display_line "Uptime   : $SYSTEM_UPTIME"
+    widget_uptime
 
     display_footer
-
     display_end
 }

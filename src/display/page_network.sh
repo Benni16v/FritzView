@@ -2,24 +2,20 @@
 
 page_network()
 {
-    cache_read
-
     display_clear
     display_header
 
-    display_line ""
+    display_line "Netzwerk"
+    display_separator
 
-    display_line "Connection"
+    display_line "WAN : $(wan_get_status)"
+    display_line "IP  : $(wan_get_external_ip)"
 
-    display_line "Type : $NETWORK_TYPE"
+    display_separator
 
-    display_line "Link : $NETWORK_LINK"
-
-    display_line ""
-
-    display_line "TX : $NETWORK_TX"
-
-    display_line "RX : $NETWORK_RX"
+    display_line "Hosts : $(hosts_count)"
+    display_line "WLAN  : $(wifi_get_clients)"
 
     display_footer
+    display_end
 }
