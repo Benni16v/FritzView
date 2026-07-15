@@ -1,4 +1,5 @@
 #!/bin/bash
+
 memory_total()
 {
     awk '/MemTotal/ {print $2}' /proc/meminfo

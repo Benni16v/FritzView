@@ -1,16 +1,16 @@
 #!/bin/bash
+
 page_cpu()
 {
     display_clear
+
     theme_header
+    theme_title "System"
 
-    display_line "CPU"
+    theme_value "CPU"        "$(cpu_load)"
+    theme_value "Temperatur" "$(cpu_temp)"
 
-    display_separator
+    theme_footer
 
-    display_line "Load : $(cpu_load)"
-    display_line "Temp : $(cpu_temp)"
-
-    display_footer
-    display_end
+    display_render
 }
