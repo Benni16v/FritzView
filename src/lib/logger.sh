@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 LOGFILE="/tmp/fritzview.log"
 

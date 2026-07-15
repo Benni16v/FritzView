@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ############################################################
 # DSL Module
@@ -85,4 +85,14 @@ dsl_get_power_up()
 {
     dsl_request |
     xml_value NewUpstreamPower
+}
+
+dsl_downstream()
+{
+    dsl_get_downstream
+}
+
+dsl_upstream()
+{
+    dsl_get_upstream
 }

@@ -1,16 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
 page_phone()
 {
     display_clear
-    display_header
+    theme_header
 
-    display_line "Telefonie"
+    theme_title "Telefonie"
     display_separator
 
-    display_line "Anrufbeantw.: $(tam_enabled)"
-    display_line "Telefone    : $(phone_count)"
+    theme_value "Status"      "$(phone_status)"
+    theme_value "Telefone"    "$(phone_count)"
+    theme_value "AB aktiv"    "$(tam_enabled)"
 
-    display_footer
-    display_end
+    theme_footer
+    display_render
 }

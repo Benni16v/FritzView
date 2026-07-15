@@ -1,3 +1,4 @@
+#!/bin/bash
 router_image()
 {
     case "$SYSTEM_NAME" in

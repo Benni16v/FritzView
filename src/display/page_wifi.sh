@@ -1,19 +1,18 @@
-#!/bin/sh
+#!/bin/bash
 
 page_wifi()
 {
     display_clear
-    display_header
 
-    display_line "WLAN"
-    display_separator
+    theme_header
+    theme_title "WLAN"
 
-    wifi_show_ssids
+    theme_value "Status" "$(wlan_status)"
+    theme_value "2.4 GHz" "$(wifi24_clients)"
+    theme_value "5 GHz"   "$(wifi5_clients)"
+    theme_value "Clients" "$(wifi_get_clients)"
 
-    display_separator
+    theme_footer
 
-    wifi_show_clients
-
-    display_footer
-    display_end
+    display_render
 }

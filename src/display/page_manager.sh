@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 PAGE_COUNT=0
 PAGE=1

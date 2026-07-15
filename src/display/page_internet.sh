@@ -1,22 +1,18 @@
+#!/bin/bash
+
 page_internet()
 {
     display_clear
-    display_header
+    
+    theme_header
+    theme_title "Internet"
 
-    display_line " Internet"
+    theme_value "Status"    "$(internet_status)"
+    theme_value "IPv4"      "$(wan_ip)"
+    theme_value "Download" "$(dsl_get_downstream)"
+    theme_value "Upload"   "$(dsl_get_upstream)"
 
-    display_separator
+    theme_footer
 
-    display_line "Status"
-
-    display_line "$(wan_get_status)"
-
-    display_separator
-
-    display_line "IP"
-
-    display_line "$(wan_get_external_ip)"
-
-    display_footer
-    display_end
+    display_render
 }

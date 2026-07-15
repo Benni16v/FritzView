@@ -1,7 +1,8 @@
+#!/bin/bash
 page_hosts()
 {
     display_clear
-    display_header
+    theme_header
 
     display_line " Netzwerk"
 

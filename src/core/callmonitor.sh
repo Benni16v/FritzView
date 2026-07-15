@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CALLCACHE="/var/tmp/fritzview/phone"
 

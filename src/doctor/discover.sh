@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 . src/lib/ssdp.sh
 . src/lib/device_db.sh

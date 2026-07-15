@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # ==========================================================
 # Cache Library
@@ -47,4 +47,9 @@ cache_exists()
 cache_delete()
 {
     rm -f "$CACHE/$1"
+}
+
+cache_get()
+{
+    cache_read "$@"
 }

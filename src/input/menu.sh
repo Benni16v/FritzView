@@ -1,3 +1,4 @@
+#!/bin/bash
 MENU_ENTRY=1
 
 MENU_ITEMS="

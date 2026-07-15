@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 LCDCFG="/tmp/lcd4linux.conf"
 
@@ -27,23 +27,31 @@ display_driver_init()
     : >/tmp/fritzview/screen.txt
 
     lcd_config_generate
+    
+    lcd4linux -f "$LCDCFG" &
+    
+    boot_animation
 }
 
 display_driver_render()
 {
-    printf "%b" "$1" >/tmp/fritzview/screen.txt
+    [ -n "$1" ] && printf "%b" "$1" >/tmp/fritzview/screen.txt
 
     lcd_refresh
 }
 
 lcd_refresh()
 {
-    if pidof lcd4linux >/dev/null
-    then
-        killall -HUP lcd4linux
-    else
-        lcd4linux -F -f "$LCDCFG" &
-    fi
+    #if pidof lcd4linux >/dev/null
+    #then
+     #   kill -HUP "$(pidof lcd4linux)"
+    #else
+     #   lcd4linux -f "$LCDCFG" &
+      #  sleep 1
+    #fi
+    
+    :
+    
 }
 
 ############################################################
@@ -96,13 +104,15 @@ EOF
 
 lcd_add_widget_screen()
 {
+for ROW in $(seq 1 20)
+do
 cat >>"$LCDCFG" <<EOF
 
-Widget Screen {
+Widget Line$(printf "%02d" "$ROW") {
 
     class 'Text'
 
-    expression 'Hallo FRITZ!View!'
+    expression file::readline('/tmp/fritzview/screen.txt',$ROW)
 
     width 40
 
@@ -113,6 +123,7 @@ Widget Screen {
 }
 
 EOF
+done
 }
 
 ############################################################
@@ -125,12 +136,21 @@ cat >>"$LCDCFG" <<EOF
 
 Layout $LCD_LAYOUT {
 
-    Row1 {
+EOF
 
-        Col1 'Screen'
+for ROW in $(seq 1 20)
+do
+cat >>"$LCDCFG" <<EOF
+    Row$ROW {
+
+        Col1 'Line$(printf "%02d" "$ROW")'
 
     }
 
+EOF
+done
+
+cat >>"$LCDCFG" <<EOF
 }
 
 Layout '$LCD_LAYOUT'

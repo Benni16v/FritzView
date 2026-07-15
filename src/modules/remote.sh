@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 remote_xml()
 {

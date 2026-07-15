@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 DEVICE_DB="cache/device.db"
 

@@ -1,16 +1,18 @@
-#!/bin/sh
+#!/bin/bash
 
 page_storage()
 {
     display_clear
-    display_header
+    theme_header
 
-    display_line "Speicher"
+    theme_title "Speicher"
     display_separator
 
-    display_line "USB : $(storage_count)"
-    display_line "NAS : $(storage_size)"
+    theme_value "RAM"      "$(memory_used)"
+    theme_value "Flash"    "$(flash_used)"
+    theme_value "USB"      "$(usb_status)"
+    theme_value "NAS"      "$(storage_size)"
 
-    display_footer
+    theme_footer
     display_end
 }

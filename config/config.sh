@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ############################################################
 # FritzView Configuration
@@ -16,12 +16,12 @@ LAYOUT_FILE="$BASE/config/layout.conf"
 
 [ -f "$LAYOUT_FILE" ] && . "$LAYOUT_FILE"
 
-BOOT_THEME="AVM"
+BOOT_THEME="avm"
 
-# AVM
-# TERMINAL
-# BIOS
-# MATRIX
+# avm
+# terminal
+# bios
+# matrix
 
 ############################################################
 # TR-064
@@ -53,7 +53,7 @@ PEARL_HEIGHT="240"
 
 UPDATE_INTERVAL=5
 
-THEME="AVM"
+THEME="avm"
 
 LOGLEVEL=1
 

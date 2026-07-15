@@ -1,9 +1,10 @@
+#!/bin/bash
 page_overview()
 {
     cache_read
 
     display_clear
-    display_header
+    theme_header
 
     widget_router
 

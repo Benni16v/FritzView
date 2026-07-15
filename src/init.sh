@@ -1,20 +1,38 @@
-#!/bin/sh
+#!/bin/bash
 
 ############################################################
 # FritzView Initialization
 ############################################################
 
-if [ -z "$BASE" ]; then
+if [ -z "$BASE" ] || [ ! -d "$BASE/config" ]; then
     BASE="$(pwd)"
 fi
 
 export BASE
+
+# detect sourcing
+(return 0 2>/dev/null) && SOURCED=1 || SOURCED=0
+
+fv_exit()
+{
+    CODE="$1"
+
+    if [ "$SOURCED" = "1" ]
+    then
+        return "$CODE"
+    else
+        exit "$CODE"
+    fi
+}
 
 ############################################################
 # Configuration
 ############################################################
 
 . "$BASE/config/config.sh"
+
+THEME=$(echo "$THEME" | tr '[:upper:]' '[:lower:]')
+BOOT_THEME=$(echo "$BOOT_THEME" | tr '[:upper:]' '[:lower:]')
 
 ############################################################
 # Libraries
@@ -64,7 +82,7 @@ then
     . "$DRIVER"
 else
     echo "Display driver '$DISPLAY_DRIVER' not found."
-    exit 1
+    return 1 2>/dev/null || exit 1
 fi
 
 ############################################################
@@ -83,6 +101,15 @@ done
 THEME_DIR="$BASE/themes/$THEME"
 
 [ -f "$THEME_DIR/$THEME.sh" ] && . "$THEME_DIR/$THEME.sh"
+
+############################################################
+# Pages
+############################################################
+
+for file in "$BASE"/src/pages/*.sh
+do
+    [ -f "$file" ] && . "$file"
+done
 
 ############################################################
 # Debug

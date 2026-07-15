@@ -1,15 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
 page_mesh()
 {
     display_clear
-    display_header
+    
+    theme_header
+    theme_title "Mesh"
 
-    display_line "Mesh"
-    display_separator
+    theme_value "Status" "$(mesh_status)"
+    theme_value "Repeater" "$(mesh_repeaters)"
+    theme_value "Clients" "$(mesh_clients)"
 
-    display_line "Repeater : $(mesh_count)"
+    theme_footer
 
-    display_footer
-    display_end
+    display_render
 }

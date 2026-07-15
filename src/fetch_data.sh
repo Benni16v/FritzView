@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 BASE=/mod/etc/fritzview/src
 

@@ -1,14 +1,9 @@
+#!/bin/bash
 case "$DISPLAY_DRIVER" in
 
 console)
 
     . "$BASE/src/displays/console.sh"
-
-;;
-
-lcd4linux)
-
-    . "$BASE/src/displays/lcd4linux.sh"
 
 ;;
 

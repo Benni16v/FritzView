@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 wifi_band_request()
 {
@@ -274,4 +274,19 @@ wifi_info()
     echo
 
     wifi_show_clients
+}
+
+wifi24_clients()
+{
+    cache_get wifi24.clients
+}
+
+wifi5_clients()
+{
+    cache_get wifi5.clients
+}
+
+wifi_status()
+{
+    cache_get wifi.status
 }

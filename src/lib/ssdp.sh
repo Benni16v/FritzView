@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 SSDP_ADDR="239.255.255.250"
 SSDP_PORT=1900

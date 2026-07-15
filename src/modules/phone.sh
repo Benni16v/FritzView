@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 phone_xml()
 {
@@ -70,4 +70,7 @@ phone_registered()
     xml_value NewRegistered
 }
 
-
+phone_count()
+{
+    phone_get_number_count
+}

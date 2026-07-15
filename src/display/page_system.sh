@@ -1,17 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
 page_system()
 {
     display_clear
-    display_header
 
-    display_line "System"
-    display_separator
+    theme_header
+    theme_title "FRITZ!Box"
 
-    display_line "Modell   : $(system_name)"
-    display_line "Firmware : $(system_version)"
-    display_line "Uptime   : $(system_uptime)"
+    theme_value "Modell"  "$(box_model)"
+    theme_value "Firmware" "$(firmware)"
+    theme_value "Uptime"  "$(system_uptime)"
 
-    display_footer
-    display_end
+    theme_footer
+
+    display_render
 }

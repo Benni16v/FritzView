@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
 page_network()
 {
     display_clear
-    display_header
+    theme_header
 
     display_line "Netzwerk"
     display_separator

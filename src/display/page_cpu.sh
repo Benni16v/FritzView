@@ -1,7 +1,8 @@
+#!/bin/bash
 page_cpu()
 {
     display_clear
-    display_header
+    theme_header
 
     display_line "CPU"
 
