@@ -33,6 +33,7 @@ fv_exit()
 
 THEME=$(echo "$THEME" | tr '[:upper:]' '[:lower:]')
 BOOT_THEME=$(echo "$BOOT_THEME" | tr '[:upper:]' '[:lower:]')
+BOOT_THEME=$(printf "%s" "$BOOT_THEME" | tr '[:upper:]' '[:lower:]')
 
 ############################################################
 # Libraries

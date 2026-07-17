@@ -9,9 +9,14 @@ export BASE
 
 display_driver_init
 
-display_show boot
+boot_screen
+
+cache_update
+
+display_show home
 
 sleep 2
+
 
 while true
 do
@@ -25,6 +30,12 @@ do
     sleep 5
 
     display_show phone
+    sleep 5
+    
+     display_show wifi
+    sleep 5
+
+    display_show mesh
     sleep 5
 
     display_show system

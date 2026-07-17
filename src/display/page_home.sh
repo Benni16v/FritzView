@@ -10,7 +10,7 @@ page_home()
 
     theme_value "Internet" "$(internet_status)"
     theme_value "Telefon"  "$(phone_status)"
-    theme_value "WLAN"     "$(wlan_status)"
+    theme_value "WLAN"     "$(wifi_status)"
     theme_value "Mesh"     "$(mesh_status)"
 
     theme_footer

@@ -6,8 +6,7 @@ page_phone()
     theme_header
 
     theme_title "Telefonie"
-    display_separator
-
+    
     theme_value "Status"      "$(phone_status)"
     theme_value "Telefone"    "$(phone_count)"
     theme_value "AB aktiv"    "$(tam_enabled)"

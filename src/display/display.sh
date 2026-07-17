@@ -1,19 +1,18 @@
 #!/bin/bash
-case "$DISPLAY_DRIVER" in
+# src/display/display.sh
 
-console)
+# HINWEIS: Der Display-Treiber wird jetzt sauber und zentral 
+# am Ende der init.sh geladen. Der doppelte case-Block hier wurde entfernt.
 
-    . "$BASE/src/displays/console.sh"
-
-;;
-
-pearl)
-
-    . "$BASE/src/displays/pearl.sh"
-
-;;
-
-esac
+############################################################
+# Fallback (Verhindert Abstürze, falls der Treiber fehlt)
+############################################################
+if ! declare -f display_driver_render >/dev/null; then
+    display_driver_render() {
+        # Falls kein Treiber geladen ist, geben wir es einfach im Terminal aus
+        printf "%b" "$1"
+    }
+fi
 
 ############################################################
 # Widgets
@@ -42,7 +41,6 @@ display_progress()
     MAX="$2"
 
     BAR=""
-
     I=0
 
     while [ "$I" -lt "$MAX" ]
@@ -91,4 +89,14 @@ display_footer()
 display_end()
 {
     display_driver_render "$DISPLAY_BUFFER"
+}
+
+display_show_boot() {
+    if [ "$BOOT_THEME" = "terminal" ]; then
+        boot_terminal_show
+    elif [ "$BOOT_THEME" = "avm" ]; then
+        boot_avm_login_show
+    else
+        echo "Standard Boot..."
+    fi
 }

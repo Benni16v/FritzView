@@ -20,7 +20,9 @@ theme_header()
 theme_footer()
 {
     display_line "+--------------------------------------+"
-}
+    display_line "| < Menu         OK           Weiter > |"
+    display_line "+--------------------------------------+"
+} 
 
 
 theme_begin()

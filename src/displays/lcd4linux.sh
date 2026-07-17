@@ -23,14 +23,16 @@ EOF
 display_driver_init()
 {
     mkdir -p /tmp/fritzview
-
     : >/tmp/fritzview/screen.txt
 
     lcd_config_generate
-    
-    lcd4linux -f "$LCDCFG" &
-    
-    boot_animation
+
+    if ! pgrep -x lcd4linux >/dev/null
+    then
+        echo "Starte lcd4linux..."
+        lcd4linux -F -q -f "$LCDCFG" >/tmp/lcd4linux.log 2>&1 &
+        sleep 1
+    fi
 }
 
 display_driver_render()

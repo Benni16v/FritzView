@@ -92,3 +92,6 @@ LCD_BACKGROUND="222222"
 LCD_BASECOLOR="222222"
 
 LCD_LAYOUT="fritzview"
+
+# Auf "true" stellen, wenn du unterwegs ohne Router testest
+: "${OFFLINE_MODE:=true}"

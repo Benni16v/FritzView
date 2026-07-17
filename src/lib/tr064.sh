@@ -27,6 +27,8 @@ tr064_request()
     printf '%s' "$BODY" > "$TMP"
 
     curl -sk \
+        --connect-timeout 3 \
+        --max-time 5 \
         --anyauth \
         --user "$TR064_USER:$TR064_PASS" \
         -H 'Content-Type: text/xml; charset="utf-8"' \
