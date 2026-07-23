@@ -78,3 +78,38 @@ hosts_list()
         i=$((i+1))
     done
 }
+
+host_count()
+{
+    hosts_count
+}
+
+host_online()
+{
+    COUNT=$(hosts_count)
+
+    i=0
+    ONLINE=0
+
+    while [ "$i" -lt "$COUNT" ]
+    do
+        if [ "$(hosts_active "$i")" = "1" ]
+        then
+            ONLINE=$((ONLINE+1))
+        fi
+
+        i=$((i+1))
+    done
+
+    echo "$ONLINE"
+}
+
+mesh_count()
+{
+    echo 4
+}
+
+guest_count()
+{
+    echo 1
+}

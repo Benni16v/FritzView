@@ -23,3 +23,8 @@ mesh_repeaters()
 {
     cache_get mesh.repeaters
 }
+
+mesh_master()
+{
+    echo "FRITZ!Box"
+}

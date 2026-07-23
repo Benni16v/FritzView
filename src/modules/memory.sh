@@ -23,5 +23,5 @@ memory_percent()
     total=$(memory_total)
     used=$(memory_used)
 
-    echo $((used*100/total))
+    printf "%d" $((used * 100 / total))
 }

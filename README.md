@@ -24,36 +24,43 @@ FritzView läuft auf:
 
 ---
 
-FritzView
-
 Features
 
-✓ TR-064
-✓ WAN
-✓ Netzwerk
-✓ WLAN
-✓ Hosts
-✓ DSL
-✓ Boxinformationen
-✓ Plugin-System
-✓ LCD4Linux
-✓ Freetz (in Arbeit)
+✓ TR-064 support
+✓ Pearl Display
+✓ Samsung SPF
+✓ Console mode
+✓ Offline mode
+✓ Themes
+✓ Boot screens
+✓ Modular pages
+✓ Plugin architecture
 
-Geplant
+Folder overview
 
-□ Telefonie
-□ Mesh
-□ SmartHome
-□ NAS
-□ VPN
-□ DECT
-□ Online-Monitor
-□ Grafiken
-□ Webinterface
-Development started June 2026.
+config/
+Configuration files
 
-Version 0.1 "Genesis"
+src/modules/
+TR-064 modules
 
-```
-Powered by LCD4Linux
-```
+src/screens/
+Display pages
+
+src/display/
+Display engine
+
+src/displays/
+Display drivers
+
+themes/
+Themes
+
+docs/
+Documentation
+
+installer/
+Installation
+
+tests/
+Unit tests

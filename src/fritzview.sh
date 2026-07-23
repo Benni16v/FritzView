@@ -5,6 +5,10 @@ BASE="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 export BASE
 
+# Offline-Modus von außen übernehmen
+OFFLINE_MODE="${OFFLINE_MODE:-false}"
+export OFFLINE_MODE
+
 . "$BASE/src/init.sh"
 
 display_driver_init
@@ -13,32 +17,13 @@ boot_screen
 
 cache_update
 
-display_show home
-
-sleep 2
-
+display_show "$(screen_current)"
 
 while true
 do
+    sleep 5
 
     cache_update
 
-    display_show home
-    sleep 5
-
-    display_show internet
-    sleep 5
-
-    display_show phone
-    sleep 5
-    
-     display_show wifi
-    sleep 5
-
-    display_show mesh
-    sleep 5
-
-    display_show system
-    sleep 5
-
+    screen_next
 done

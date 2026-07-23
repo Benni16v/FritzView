@@ -67,10 +67,10 @@ done
 # Display
 ############################################################
 
-for file in "$BASE"/src/display/*.sh
-do
-    [ -f "$file" ] && . "$file"
-done
+. "$BASE/src/display/display_buffer.sh"
+. "$BASE/src/display/display_driver.sh"
+. "$BASE/src/display/display_widgets.sh"
+. "$BASE/src/display/display_manager.sh"
 
 ############################################################
 # Display Driver
@@ -107,8 +107,19 @@ THEME_DIR="$BASE/themes/$THEME"
 # Pages
 ############################################################
 
-for file in "$BASE"/src/pages/*.sh
+. "$BASE/src/screens/screen_manager.sh"
+
+echo "Loading screens..."
+
+for file in "$BASE"/src/screens/*.sh
 do
+    case "$(basename "$file")" in
+        screen_manager.sh)
+            continue
+            ;;
+    esac
+
+    echo " -> $file"
     [ -f "$file" ] && . "$file"
 done
 

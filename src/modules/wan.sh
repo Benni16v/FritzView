@@ -129,5 +129,7 @@ xml_value NewTotalPacketsReceived
 
 wan_update()
 {
-    wan_request > "$BASE/cache/wan.xml"
+    cache_write "network/wan_status"  "$(wan_get_status)"
+    cache_write "network/wan_ip"      "$(wan_get_external_ip)"
+    cache_write "network/wan_uptime"  "$(wan_get_uptime)"
 }

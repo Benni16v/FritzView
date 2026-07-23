@@ -37,7 +37,15 @@ display_driver_init()
 
 display_driver_render()
 {
-    [ -n "$1" ] && printf "%b" "$1" >/tmp/fritzview/screen.txt
+    echo "===== DISPLAY DRIVER ====="
+
+    printf "%b\n" "$1"
+
+    printf "%b" "$1" >/tmp/fritzview/screen.txt
+
+    echo "===== SCREEN.TXT ====="
+    cat /tmp/fritzview/screen.txt
+    echo "======================"
 
     lcd_refresh
 }
@@ -106,7 +114,7 @@ EOF
 
 lcd_add_widget_screen()
 {
-for ROW in $(seq 1 20)
+for ROW in $(seq 1 "$DISPLAY_HEIGHT")
 do
 cat >>"$LCDCFG" <<EOF
 
@@ -140,7 +148,7 @@ Layout $LCD_LAYOUT {
 
 EOF
 
-for ROW in $(seq 1 20)
+for ROW in $(seq 1 "$DISPLAY_HEIGHT")
 do
 cat >>"$LCDCFG" <<EOF
     Row$ROW {

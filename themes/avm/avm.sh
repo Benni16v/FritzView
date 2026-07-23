@@ -4,6 +4,9 @@
 # AVM Theme
 ############################################################
 
+export LANG=C.UTF-8
+export LC_ALL=C.UTF-8
+
 theme_separator()
 {
     display_line "+--------------------------------------+"
@@ -20,7 +23,7 @@ theme_header()
 theme_footer()
 {
     display_line "+--------------------------------------+"
-    display_line "| < Menu         OK           Weiter > |"
+    display_line "| < Menü         OK           Weiter > |"
     display_line "+--------------------------------------+"
 } 
 

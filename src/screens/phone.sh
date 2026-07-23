@@ -1,5 +1,7 @@
 #!/bin/bash
 
+register_screen phone
+
 page_phone()
 {
     display_clear

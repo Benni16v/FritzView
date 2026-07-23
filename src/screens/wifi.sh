@@ -1,5 +1,7 @@
 #!/bin/bash
 
+register_screen wifi
+
 page_wifi()
 {
     display_clear

@@ -1,62 +1,33 @@
-v0.1 Genesis
-
-[x] Git
-[x] Architektur
-[x] Core
-
-[ ] TR064
-
-[ ] Scheduler
-
-[ ] Display Engine
-
-[ ] Callmonitor
-
-[ ] Pearl
-
-[ ] Samsung SPF
-
-[ ] Installer
-
-[ ] Themes
-
-v0.2
-
-Core
-[x] TR064
-
-[x] Config
-
-[x] Credentials
-
-[x] Tests
-
-Informationen
-
-[x] WAN
-
-[x] WLAN
-
-[x] Hosts
-
-[x] DSL
-
-[x] Network
-
-[x] Box
-
-[ ] Telefonie
-
-[ ] Mesh
-
-[ ] SmartHome
-
+✔ Basis
+Boot
+Theme
+Cache
 Display
+Pearl
+Console
+Samsung
+Offline
 
-[ ] LCD4Linux
+✔ Netzwerk
+WAN
+WLAN
+Hosts
+Telefonie
 
-[ ] Freetz
+In Arbeit
+OSCam
+Speedport
+Mesh
+DSL
 
-[ ] Plugin API
-
-[ ] Themes
+Geplant
+PNG Bootscreen
+Caller Picture
+Wetter
+Kalender
+Raspberry Pi Stats
+Docker
+Synology
+FritzNAS
+MQTT
+Home Assistant

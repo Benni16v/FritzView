@@ -1,5 +1,7 @@
 #!/bin/bash
 
+register_screen home
+
 page_home()
 {
     display_clear

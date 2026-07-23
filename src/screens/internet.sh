@@ -1,5 +1,7 @@
 #!/bin/bash
 
+register_screen internet
+
 page_internet()
 {
     display_clear

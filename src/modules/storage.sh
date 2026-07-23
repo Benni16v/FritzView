@@ -53,3 +53,29 @@ storage_port()
 {
     storage_request | xml_value NewFTPWANPort
 }
+
+############################################################
+# FritzView Helper
+############################################################
+
+flash_used()
+{
+    echo "-"
+}
+
+usb_status()
+{
+    DEVICES=$(storage_devices)
+
+    if [ -z "$DEVICES" ] || [ "$DEVICES" = "0" ]
+    then
+        echo "Nein"
+    else
+        echo "Ja ($DEVICES)"
+    fi
+}
+
+storage_size()
+{
+    echo "-"
+}
