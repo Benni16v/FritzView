@@ -40,5 +40,5 @@ display_center()
 
 display_render()
 {
-    display_driver_render "$(buffer_get)"
+    driver_render "$(buffer_get)"
 }

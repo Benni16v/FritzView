@@ -21,9 +21,9 @@ display_show "$(screen_current)"
 
 while true
 do
-    sleep 5
-
     cache_update
 
-    screen_next
+    navigation_tick
+
+    sleep 1
 done

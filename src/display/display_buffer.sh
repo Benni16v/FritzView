@@ -15,7 +15,7 @@ buffer_clear()
 
 buffer_add()
 {
-    DISPLAY_BUFFER="${DISPLAY_BUFFER}$1\n"
+    DISPLAY_BUFFER+="$1"$'\n'
 }
 
 buffer_get()

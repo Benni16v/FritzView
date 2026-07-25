@@ -22,10 +22,10 @@ theme_header()
 
 theme_footer()
 {
-    display_line "+--------------------------------------+"
-    display_line "| < Menü         OK           Weiter > |"
-    display_line "+--------------------------------------+"
-} 
+    theme_separator
+    display_nav "Menue" "OK" "Weiter"
+    theme_separator
+}
 
 
 theme_begin()

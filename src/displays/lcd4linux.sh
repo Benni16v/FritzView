@@ -41,7 +41,7 @@ display_driver_render()
 
     printf "%b\n" "$1"
 
-    printf "%b" "$1" >/tmp/fritzview/screen.txt
+    printf "%b\n" "$1" >/tmp/fritzview/screen.txt
 
     echo "===== SCREEN.TXT ====="
     cat /tmp/fritzview/screen.txt
@@ -206,4 +206,13 @@ lcd_config_generate()
 lcd_show_config()
 {
     cat "$LCDCFG"
+}
+
+display_driver_stop()
+{
+    if pidof lcd4linux >/dev/null
+    then
+        kill "$(pidof lcd4linux)"
+        wait 2>/dev/null
+    fi
 }

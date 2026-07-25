@@ -17,6 +17,8 @@ menu_show()
     display_clear
 
     display_header
+    
+    NR=1
 
     echo "$MENU_ITEMS" |
     while read ITEM
@@ -38,4 +40,31 @@ menu_show()
     display_footer
 
     display_end
+}
+
+############################################################
+# Menu Navigation
+############################################################
+
+menu_prev()
+{
+    MENU_ENTRY=$((MENU_ENTRY-1))
+
+    [ "$MENU_ENTRY" -lt 1 ] && MENU_ENTRY=8
+
+    menu_show
+}
+
+menu_next()
+{
+    MENU_ENTRY=$((MENU_ENTRY+1))
+
+    [ "$MENU_ENTRY" -gt 8 ] && MENU_ENTRY=1
+
+    menu_show
+}
+
+menu_enter()
+{
+    echo "Menu: $MENU_ENTRY"
 }
