@@ -1,0 +1,7 @@
+config FREETZ_PACKAGE_FRITZVIEW
+	bool "FritzView"
+	default n
+	select FREETZ_LIB_libusb
+	help
+		FritzView rendert Status-Displays und stellt
+		ein Live-WebIF unter /fritzview bereit.

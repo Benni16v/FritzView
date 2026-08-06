@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FritzView WebIF</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 { margin-bottom: 20px; font-size: 1.5rem; color: #f0f0f0; }
+    .screen-container {
+      padding: 10px;
+      background: #222;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      /* Verhindert unscharfe Pixel beim Skalieren kleiner Displays */
+      image-rendering: pixelated; 
+    }
+  </style>
+</head>
+<body>
+
+  <h1>FritzView Live Display</h1>
+
+  <div class="screen-container">
+    <a href="config.html">
+      <img id="display" src="screen.png" alt="FritzView Display">
+    </a>
+  </div>
+
+  <script>
+    // Aktualisiert das Bild alle 1000ms (1 Sekunde) ohne Cache-Probleme
+    setInterval(() => {
+      const img = document.getElementById('display');
+      img.src = 'screen.png?t=' + new Date().getTime();
+    }, 1000);
+  </script>
+
+</body>
+</html>

@@ -4,6 +4,28 @@
 # WAN Module
 ############################################################
 
+wan_common_request()
+{
+    tr064_request \
+        "urn:dslforum-org:service:WANCommonInterfaceConfig:1" \
+        "/upnp/control/wancommonifconfig1" \
+        "$1" \
+"$2"
+}
+
+############################################################
+
+wan_ip_request()
+{
+    tr064_request \
+        "urn:dslforum-org:service:WANIPConnection:1" \
+        "/upnp/control/wanipconnection1" \
+        "$1" \
+"$2"
+}
+
+############################################################
+
 wan_get_external_ip()
 {
     tr064_request \
@@ -23,9 +45,7 @@ xml_value NewExternalIPAddress
 
 wan_get_status()
 {
-    tr064_request \
-        "urn:dslforum-org:service:WANIPConnection:1" \
-        "/upnp/control/wanipconnection1" \
+    wan_ip_request \
         "GetStatusInfo" \
 '<?xml version="1.0"?>
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
@@ -132,4 +152,36 @@ wan_update()
     cache_write "network/wan_status"  "$(wan_get_status)"
     cache_write "network/wan_ip"      "$(wan_get_external_ip)"
     cache_write "network/wan_uptime"  "$(wan_get_uptime)"
+}
+
+wan_downstream()
+{
+    wan_request | xml_value NewDownstreamMaxBitRate
+}
+
+wan_upstream()
+{
+    wan_request | xml_value NewUpstreamMaxBitRate
+}
+
+wan_ipv6()
+{
+    wan_request | xml_value NewExternalIPv6Address
+}
+
+wan_provider()
+{
+    wan_request | xml_value NewISPName
+}
+
+wan_dump_status()
+{
+    wan_ip_request \
+        "GetStatusInfo" \
+'<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+<s:Body>
+<u:GetStatusInfo xmlns:u="urn:dslforum-org:service:WANIPConnection:1"/>
+</s:Body>
+</s:Envelope>'
 }

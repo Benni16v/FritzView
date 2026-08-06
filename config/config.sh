@@ -1,69 +1,35 @@
 #!/bin/bash
-
 ############################################################
-# FritzView Configuration
+# FritzView Configuration Loader
 ############################################################
-
 if [ -z "$BASE" ]; then
     BASE="$(pwd)"
 fi
-
-############################################################
-# Boot Theme
-############################################################
-
-LAYOUT_FILE="$BASE/config/layout.conf"
-
-[ -f "$LAYOUT_FILE" ] && . "$LAYOUT_FILE"
-
-BOOT_THEME="avm"
-
-# avm
-# terminal
-# bios
-# matrix
-
-############################################################
-# TR-064
-############################################################
-
+# Standardwerte setzen
 TR064_HOST="192.168.178.1"
 TR064_PORT="49443"
+TR064_USER=""
+TR064_PASS=""
 
-############################################################
-# Credentials
-############################################################
-
-CRED_FILE="$BASE/config/credentials.conf"
-
-if [ -f "$CRED_FILE" ]; then
-    . "$CRED_FILE"
-fi
-
-#################################################
-# Pearl
-#################################################
+THEME="avm"
+BOOT_THEME="avm"
 
 DISPLAY_NAME="Pearl"
-
+DISPLAY_DRIVER="ax206"
 PEARL_DEVICE="/dev/dpf0"
-
 PEARL_WIDTH="320"
 PEARL_HEIGHT="240"
 
+SAMSUNG_WIDTH="800"
+SAMSUNG_HEIGHT="480"
 UPDATE_INTERVAL=5
-
-THEME="avm"
 
 LOGLEVEL=1
 
-############################################################
-# Display
-############################################################
-
-DISPLAY_DRIVER="lcd4linux"
-
+: "${OFFLINE_MODE:=false}"
 PAGE_TIMEOUT=5
+
+DEBUG_TERMINAL="true"
 
 PAGES="
 overview
@@ -72,26 +38,11 @@ wifi
 hosts
 system
 "
-
-############################################################
-# LCD4Linux
-############################################################
-
-LCD_NAME="dpf"
-
-LCD_DRIVER="DPF"
-
-LCD_PORT="usb0"
-
-LCD_FONT="8x10"
-
-LCD_FOREGROUND="ffffff"
-
-LCD_BACKGROUND="222222"
-
-LCD_BASECOLOR="222222"
-
-LCD_LAYOUT="fritzview"
-
-# Auf "true" stellen, wenn du unterwegs ohne Router testest
-: "${OFFLINE_MODE:=false}"
+# Benutzer-Einstellungen laden (überschreibt Standardwerte)
+CRED_FILE="$BASE/config/credentials.conf"
+if [ -f "$CRED_FILE" ]; then
+    . "$CRED_FILE"
+fi
+# Werte formatieren
+THEME=$(echo "$THEME" | tr '[:upper:]' '[:lower:]')
+BOOT_THEME=$(echo "$BOOT_THEME" | tr '[:upper:]' '[:lower:]')

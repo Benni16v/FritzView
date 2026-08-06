@@ -23,7 +23,7 @@ theme_header()
 theme_footer()
 {
     theme_separator
-    display_nav "Menue" "OK" "Weiter"
+    display_nav "Menü" "OK" "Weiter"
     theme_separator
 }
 
@@ -44,8 +44,14 @@ theme_end()
 
 theme_title()
 {
-    printf -v LINE "| %-36s |" "$1"
-    display_line "$LINE"
+    local TEXT="$1"
+    local LEN
+    LEN=$(char_len "$TEXT")
+    local PAD=$((36 - LEN))
+    [ "$PAD" -lt 0 ] && PAD=0
+    local SPACES
+    printf -v SPACES '%*s' "$PAD" ""
+    display_line "| ${TEXT}${SPACES} |"
     theme_separator
 }
 
@@ -56,8 +62,19 @@ theme_line()
 
 theme_value()
 {
-    printf -v LINE "| %-12s %-23s |" "$1" "$2"
-    display_line "$LINE"
+    local KEY="$1"
+    local VAL="$2"
+    local KLEN VLEN KPAD VPAD
+    KLEN=$(char_len "$KEY")
+    VLEN=$(char_len "$VAL")
+    KPAD=$((13 - KLEN))
+    VPAD=$((23 - VLEN))
+    [ "$KPAD" -lt 0 ] && KPAD=0
+    [ "$VPAD" -lt 0 ] && VPAD=0
+    local KSPACES VSPACES
+    printf -v KSPACES '%*s' "$KPAD" ""
+    printf -v VSPACES '%*s' "$VPAD" ""
+    display_line "| ${KEY}${KSPACES}${VAL}${VSPACES} |"
 }
 
 theme_box()

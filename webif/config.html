@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>FritzView Konfiguration</title>
+  <style>
+    body { background:#121212; color:#fff; font-family:sans-serif; padding:20px; max-width:500px; margin:auto; }
+    label { display:block; margin-top:15px; }
+    select, input[type=text] { width:100%; padding:6px; margin-top:4px; box-sizing:border-box; }
+    input[type=submit] { margin-top:20px; padding:10px 20px; background:#66aaff; border:none; border-radius:4px; color:#000; font-weight:bold; }
+    a { color:#66aaff; }
+  </style>
+</head>
+<body>
+  <h1>FritzView Konfiguration</h1>
+  <form method="POST" action="/cgi-bin/save.sh">
+  
+  <label>Display
+      <select name="display_driver" id="driverSelect" onchange="document.getElementById('samsungModelRow').style.display = (this.value === 'samsung') ? 'block' : 'none'">
+        <option value="ax206">Pearl AX206 (320x240)</option>
+        <option value="samsung">Samsung SPF-Bilderrahmen</option>
+      </select>
+    </label>
+    <label id="samsungModelRow" style="display:none">Samsung-Modell
+      <select name="samsung_model">
+        <option value="800x480">SPF-75H/76H (800x480)</option>
+        <option value="800x480">SPF-87H (800x480)</option>
+        <option value="800x600">SPF-83H (800x600)</option>
+        <option value="1024x600">SPF-107H (1024x600)</option>
+        <option value="1024x600">SPF-105P (1024x600)</option>
+        <option value="800x600">SPF-85H/86H (800x600)</option>
+        <option value="800x480">SPF-72H (800x480)</option>
+        <option value="800x600">SPF-700T (800x600)</option>
+        <option value="800x600">SPF-85P/86P (800x600)</option>
+        <option value="1024x600">SPF-107H alt (1024x600)</option>
+        <option value="1024x600">SPF-1000P (1024x600)</option>
+        <option value="800x480">SPF-800P (800x480)</option>
+      </select>
+    </label>
+  
+    <label>Theme
+      <select name="theme">
+        <option value="avm">AVM</option>
+      </select>
+    </label>
+    <label>Boot-Theme
+      <select name="boot_theme">
+        <option value="avm">AVM (Passwort-Animation)</option>
+        <option value="avmgui">AVM GUI (Bildsequenz)</option>
+        <option value="sysinit">Sysinit (Textkonsole)</option>
+        <option value="bios">BIOS</option>
+        <option value="matrix">Matrix</option>
+        <option value="splash">Splash</option>
+        <option value="login">Login</option>
+        <option value="terminal">Terminal</option>
+      </select>
+    </label>
+    
+    <label>Anzeigefarbe
+      <select name="color" id="colorSelect" onchange="document.getElementById('colorPreview').style.background=this.value">
+        <option value="white">weiss</option>
+        <option value="black">schwarz</option>
+        <option value="gray">grau</option>
+        <option value="silver">silber</option>
+        <option value="slategray">schiefergrau</option>
+        <option value="aquamarine">aquamarine</option>
+        <option value="yellow">gelb</option>
+        <option value="greenyellow">gr&uuml;ngelb</option>
+        <option value="gold">gold</option>
+        <option value="red">rot</option>
+        <option value="tomato">tomate</option>
+        <option value="darkred">dunkelrot</option>
+        <option value="indianred">indianrot</option>
+        <option value="orange">orange</option>
+        <option value="darkorange">dunkelorange</option>
+        <option value="orangered">orangerot</option>
+        <option value="green">gr&uuml;n</option>
+        <option value="lawngreen">rasengr&uuml;n</option>
+        <option value="darkgreen">dunkelgr&uuml;n</option>
+        <option value="lime">limone</option>
+        <option value="lightgreen">hellgr&uuml;n</option>
+        <option value="blue">blau</option>
+        <option value="blueviolet">blauviolett</option>
+        <option value="indigo">indigo</option>
+        <option value="darkblue">dunkelblau</option>
+        <option value="cadetblue">kadettblau</option>
+        <option value="cornflowerblue">kornblumenblau</option>
+        <option value="lightblue">hellblau</option>
+        <option value="magenta">magenta</option>
+        <option value="violet">violett</option>
+        <option value="darkorchid">dunkelorchidee</option>
+        <option value="deeppink">dunkelrosa</option>
+        <option value="cyan">cyan</option>
+        <option value="brown">braun</option>
+        <option value="sandybrown">sandbraun</option>
+        <option value="moccasin">moccasin</option>
+        <option value="rosybrown">rosigbraun</option>
+        <option value="olive">olive</option>
+      </select>
+      <div id="colorPreview" style="margin-top:8px; height:30px; border-radius:4px; background:white;"></div>
+    </label>
+    <input type="submit" value="Speichern">
+  </form>
+  <p><a href="index.html">&larr; zurück zur Anzeige</a></p>
+</body>
+</html>

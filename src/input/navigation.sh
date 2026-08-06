@@ -1,5 +1,4 @@
 #!/bin/bash
-
 ############################################################
 # Screen Navigation
 ############################################################
@@ -8,7 +7,6 @@ AUTO_MODE=1
 MENU_MODE=0
 
 SCREEN_TIMEOUT="${SCREEN_TIMEOUT:-5}"
-
 LAST_ACTION=$(date +%s)
 
 menu_touch()
@@ -76,15 +74,13 @@ menu_ok()
 navigation_tick()
 {
     local NOW
-
     NOW=$(date +%s)
 
     [ "$AUTO_MODE" != "1" ] && return
 
-    if [ $((NOW-LAST_ACTION)) -ge "$SCREEN_TIMEOUT" ]
+    if [ $((NOW - LAST_ACTION)) -ge "$SCREEN_TIMEOUT" ]
     then
         LAST_ACTION="$NOW"
-
         display_next
     fi
 }

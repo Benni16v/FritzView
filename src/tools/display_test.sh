@@ -13,7 +13,7 @@ cleanup()
     echo
     echo "Beende Display..."
 
-    display_driver_stop 2>/dev/null
+    driver_stop 2>/dev/null
 
     exit 0
 }
@@ -22,7 +22,7 @@ trap cleanup INT TERM
 
 . "$BASE/src/init.sh"
 
-display_driver_init
+driver_init
 
 echo "PAGE=$PAGE"
 display_show "$PAGE"

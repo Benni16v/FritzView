@@ -54,15 +54,6 @@ do
 done
 
 ############################################################
-# Drivers
-############################################################
-
-for file in "$BASE"/src/drivers/*.sh
-do
-    [ -f "$file" ] && . "$file"
-done
-
-############################################################
 # Modules
 ############################################################
 
@@ -86,9 +77,15 @@ done
 ############################################################
 
 . "$BASE/src/display/display_buffer.sh"
-. "$BASE/src/display/display_driver.sh"
+. "$BASE/src/display/display_api.sh"
 . "$BASE/src/display/display_widgets.sh"
 . "$BASE/src/display/display_manager.sh"
+
+############################################################
+# Driver
+############################################################
+
+. "$BASE/src/drivers/driver.sh"
 
 ############################################################
 # Input
@@ -98,20 +95,6 @@ for file in "$BASE"/src/input/*.sh
 do
     [ -f "$file" ] && . "$file"
 done
-
-############################################################
-# Display Driver
-############################################################
-
-DRIVER="$BASE/src/displays/$DISPLAY_DRIVER.sh"
-
-if [ -f "$DRIVER" ]
-then
-    . "$DRIVER"
-else
-    echo "Display driver '$DISPLAY_DRIVER' not found."
-    return 1 2>/dev/null || exit 1
-fi
 
 ############################################################
 # Boot Screens

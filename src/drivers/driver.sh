@@ -1,52 +1,14 @@
 #!/bin/bash
-
 ############################################################
-# Generic Driver API
+# Driver Loader (Native AX206 Pearl Driver)
 ############################################################
 
-driver_init()
-{
-    :
-}
+DRIVER_NAME="${DISPLAY_DRIVER:-pearl}"
+DRIVER_FILE="$BASE/src/drivers/${DRIVER_NAME}.sh"
 
-driver_stop()
-{
-    :
-}
+if [ ! -f "$DRIVER_FILE" ]; then
+    echo "ERROR: Driver '$DRIVER_NAME' not found in $DRIVER_FILE"
+    fv_exit 1
+fi
 
-driver_clear()
-{
-    :
-}
-
-driver_render()
-{
-    local TEXT="$1"
-
-    echo "No display driver loaded."
-}
-
-driver_sleep()
-{
-    :
-}
-
-driver_wakeup()
-{
-    :
-}
-
-driver_brightness()
-{
-    :
-}
-
-driver_buttons()
-{
-    :
-}
-
-driver_button_poll()
-{
-    :
-}
+. "$DRIVER_FILE"

@@ -61,3 +61,11 @@ format_uptime()
     printf "%dT %02d:%02d" \
         "$DAYS" "$HOURS" "$MINS"
 }
+
+############################################################
+# Zaehlt Zeichen (nicht Bytes) - wichtig bei Umlauten
+############################################################
+char_len()
+{
+    printf '%s' "$1" | wc -m
+}
