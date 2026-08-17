@@ -70,23 +70,19 @@ wget -qO- "https://github.com/Benni16v/FritzView/archive/refs/heads/main.tar.gz"
 WEBIF_SOURCE="$TARGET_DIR/webif"
 mkdir -p "$WEBIF_SOURCE"
 
-# 4. WebIF Verlinkung für den Webserver setzen (ip.der.box/fritzview)
-printf "${CYAN}[3/4] Richte WebIF (ip.der.box/fritzview) ein...${NC}\n"
-TARGET_DIRS="/usr/mww /var/html /usr/www/html"
-
-for TARGET in $TARGET_DIRS; do
-    if [ -d "$TARGET" ]; then
-        ln -sf "$WEBIF_SOURCE" "$TARGET/fritzview"
-        echo "   -> Symlink erstellt in $TARGET/fritzview"
-    fi
-done
+# 4. WebIF Verlinkung für den Freetz-Webserver (Port 81) setzen
+printf "${CYAN}[3/4] Richte WebIF (ip.der.box:81/fritzview) ein...${NC}\n"
+mkdir -p /var/mww
+ln -sf "$WEBIF_SOURCE" /var/mww/fritzview
+printf "   -> Symlink erstellt in /var/mww/fritzview\n"
 
 # 5. Autostart in rc.custom eintragen (nur bei dauerhafter Installation)
 printf "${CYAN}[4/4] Prüfe Autostart-Konfiguration...${NC}\n"
 if [ "$PERSISTENT" -eq 1 ]; then
     RC_CUSTOM="/tmp/flash/mod/rc.custom"
     
-    AUTO_CMD="[ -d $WEBIF_SOURCE ] && for d in /usr/mww /var/html /usr/www/html; do [ -d \$d ] && ln -sf $WEBIF_SOURCE \$d/fritzview; done\n$TARGET_DIR/src/fritzview.sh &"
+    # Befehl, der beim Booten den Symlink neu setzt und das Hintergrund-Skript startet
+    AUTO_CMD="[ -d $WEBIF_SOURCE ] && mkdir -p /var/mww && ln -sf $WEBIF_SOURCE /var/mww/fritzview\n[ -f $TARGET_DIR/src/fritzview.sh ] && $TARGET_DIR/src/fritzview.sh &"
 
     if [ -f "$RC_CUSTOM" ]; then
         if ! grep -q "FritzView Start" "$RC_CUSTOM"; then
@@ -107,5 +103,5 @@ fi
 echo ""
 printf "${GREEN}==============================================${NC}\n"
 printf "${GREEN}   FritzView erfolgreich eingerichtet!        ${NC}\n"
-printf "${GREEN}   WebIF: http://<IP-deiner-Box>/fritzview   ${NC}\n"
+printf "${GREEN}   WebIF: http://<IP-deiner-Box>:81/fritzview ${NC}\n"
 printf "${GREEN}==============================================${NC}\n"
