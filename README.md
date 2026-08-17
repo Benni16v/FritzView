@@ -1,66 +1,54 @@
 # FRITZ!View
 
 > A modular dashboard framework for AVM FRITZ!Box devices powered by LCD4Linux.
-<´> Copyright (c) 2026 Benjamin Bilzer
 
-FritzView ist und bleibt Open Source.
+Copyright (c) 2026 Benjamin Bilzer
+
+FRITZ!View ist und bleibt Open Source.
 
 Falls Dir das Projekt gefällt und Du die Entwicklung unterstützen
 möchtest, wird es später eine freiwillige Spendenseite geben.
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![Version](https://img.shields.io/badge/version-0.2.0-blue)
 ![Status](https://img.shields.io/badge/status-Development-orange)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-FritzView läuft auf:
+---
 
-✓ Freetz
-✓ OpenWrt
-✓ Raspberry Pi
-✓ Linux
-✓ Docker
-✓ x86
-✓ ARM
+### Platform Support
+
+FRITZ!View läuft flexibel auf verschiedenen Systemen:
+
+* ✓ Freetz / Freetz-NG
+* ✓ OpenWrt
+* ✓ Raspberry Pi
+* ✓ Linux (Debian / Ubuntu / ALARM)
+* ✓ Docker
+* ✓ Architecture: x86 / ARM / MIPS
 
 ---
 
-Features
+### Features
 
-✓ TR-064 support
-✓ Pearl Display
-✓ Samsung SPF
-✓ Console mode
-✓ Offline mode
-✓ Themes
-✓ Boot screens
-✓ Modular pages
-✓ Plugin architecture
+* **TR-064 Anbindung:** Direkte Abfrage von DSL, WAN, WLAN, Hosts und Telefonie
+* **Display-Treiber:** Pearl AX206, Samsung SPF (Bilderrahmen), Console Mode
+* **Boot & Themes:** Flexible Boot-Screens und anpassbare UI-Themes
+* **Architektur:** Modularer Aufbau für Pages, Displays und Plugins
+* **Offline-Modus:** Robustes Caching bei Verbindungsunterbrechungen
 
-Folder overview
+---
 
-config/
-Configuration files
+### Verzeichnisstruktur
 
-src/modules/
-TR-064 modules
+```text
+config/         # Konfigurationsdateien (z. B. credentials.conf)
+src/modules/    # TR-064 Schnittstellen (WAN, DSL, WLAN, Hosts)
+src/screens/    # Bildschirminhalte und Layouts
+src/display/    # Display Engine
+src/displays/   # Display-Treiber (Pearl, Samsung, Terminal)
+webif/          # Web-Interface & CGI-Steuerung
+themes/         # Farbschemata und Themes
+docs/           # Dokumentation
+installer/      # Setup- und Update-Skripte
+tests/          # Testframework und Unittests
 
-src/screens/
-Display pages
-
-src/display/
-Display engine
-
-src/displays/
-Display drivers
-
-themes/
-Themes
-
-docs/
-Documentation
-
-installer/
-Installation
-
-tests/
-Unit tests

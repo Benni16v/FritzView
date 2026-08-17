@@ -1,40 +1,21 @@
-# TODO
+# TODO List
 
-## Core
+## Core Engine
+- [ ] WebIF Erweiterung für Netatmo-Tab
+- [ ] Plugin Engine finalisieren
+- [ ] Scheduler für Display-Timeout/Standby optimieren
 
-- Installer
-- Config
-- Plugin Engine
-- Theme Engine
-- Scheduler
-- Cache
-
-## Plugins
-
-- DSL
-- WAN
-- Phone
-- Mesh
-- USB
-- NAS
-- VPN
-- SmartHome
+## Plugins & Integrationen
+- [ ] SmartHome (AVM DECT 200/300)
+- [ ] VPN-Statusanzeige
+- [ ] NAS / USB-Speicher Status
 
 ## Themes
+- [ ] AVM Classic / Dark
+- [ ] Retro Themes (NES, GameBoy)
+- [ ] Sci-Fi Themes (PipBoy, LCARS, Matrix)
 
-- AVM
-- NES
-- GameBoy
-- PS3
-- Xbox
-- Matrix
-- PipBoy
-- LCARS
-
-## Documentation
-
-- Installation
-- Configuration
-- Troubleshooting
-- Theme Guide
-- Plugin Guide
+## Dokumentation
+- [ ] Installationsanleitung für Freetz-NG
+- [ ] Anleitung zur Erstellung eigener Themes
+- [ ] Plugin-Entwicklerhandbuch

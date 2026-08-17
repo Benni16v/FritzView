@@ -22,5 +22,9 @@ attic/
 config/credentials.conf
 token.log
 lcd4linux.conf
+cookie.txt
 
 
+cookie.txt
+credentials.conf
+*.bak

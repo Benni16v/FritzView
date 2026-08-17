@@ -1,33 +1,26 @@
 # Changelog
 
-## Version 0.1.0 "Genesis"
+Alle wichtigen Änderungen am Projekt FRITZ!View werden in dieser Datei dokumentiert.
 
-- Project created
-- Repository initialized
-- Project structure created
+## [0.2.0] - 2026-08
 
-0.2.0
+### Neu
+* **TR-064 Library:** Vollständige Eigenentwicklung für AVM-Schnittstellen
+* **System-Module:** WAN-, DSL-, WLAN-, Hosts-, Network- und Box-Modul
+* **Testframework:** Integrierte Testumgebung für Schnittstellen
+* **Credentials:** Auslagerung sensibler Anmeldedaten in `credentials.conf`
+* **WebIF Update-System:** Direktes Online-Update über CGI/GitHub inklusive Schutz der `credentials.conf`
 
-Neu
+### Verbessert
+* Projektstruktur und Pfad-Handling überarbeitet
+* Konfigurations-Logik und Initialisierung optimiert
 
-- komplette TR064-Library
-- WAN-Modul
-- DSL-Modul
-- WLAN-Modul
-- Hosts-Modul
-- Network-Modul
-- Box-Modul
-- Testframework
-- Credentials ausgelagert
+### Behoben
+* Fehlerhafte `BASE`-Pfad-Ermittlung behoben
+* Handhabung von Digest-Authentifizierung korrigiert
 
-Verbessert
+---
 
-- Projektstruktur
-- Config
-- Initialisierung
+## [0.1.0] - "Genesis"
 
-Behoben
-
-- BASE-Pfad
-- Credentials
-- Digest-Authentifizierung
+* Projekt-Init und grundlegende Repository-Struktur
